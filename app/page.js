@@ -1,7 +1,45 @@
+'use client';
+
+import { useState } from 'react';
 import Footer from "@/components/Footer";
 import Image from "next/image";
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setMessage('');
+
+    if (!email) {
+      setMessage('Email is required.');
+      return;
+    }
+
+    try {
+      const res = await fetch('/api/add_to_waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setMessage('Successfully joined the waitlist!');
+        setEmail('');
+      } else {
+        setMessage(data.message || 'Something went wrong.');
+      }
+    } catch (error) {
+      setMessage('Something went wrong.');
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <main className="bg-white">
@@ -33,20 +71,9 @@ export default function Home() {
                     <div className="mt-10 sm:mt-12">
                       <form
                         className="sm:mx-auto sm:max-w-xl lg:mx-0"
-                        action="https://api.web3forms.com/submit"
-                        method="POST"
+                        onSubmit={handleSubmit}
                       >
                         <div className="sm:flex">
-                          <input
-                            type="hidden"
-                            name="access_key"
-                            value="7048e4b3-ce01-4617-b3e3-7545fedb7e7d"
-                          ></input>
-                          <input
-                            type="hidden"
-                            name="subject"
-                            value="New Waitlist"
-                          ></input>
                           <div className="min-w-0 flex-1">
                             <label htmlFor="email" className="sr-only">
                               Email address
@@ -54,9 +81,10 @@ export default function Home() {
                             <input
                               id="email"
                               type="email"
-                              name="email"
                               placeholder="Enter your email"
                               className="block w-full rounded-md bg-white px-4 py-2.5 text-base text-black placeholder-gray-500 outline-2 outline-black focus:outline-none focus:ring-2 focus:ring-gray-400"
+                              value={email}
+                              onChange={(e) => setEmail(e.target.value)}
                               autoComplete="off"
                               required
                             />
@@ -71,6 +99,7 @@ export default function Home() {
                           </div>
                         </div>
                       </form>
+                      {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
                     </div>
                     {/* button for apple store */}
                     {/* <div className="mt-3">
@@ -100,6 +129,7 @@ export default function Home() {
                     height={1000} // Set height of the logo
                     src="/mylyfe-product.png"
                     alt="Placeholder image"
+                    priority
                   />
                 </div>
               </div>
