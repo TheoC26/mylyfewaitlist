@@ -65,8 +65,7 @@ export default function Home() {
                       <span className="block text-black">MyLyfe</span>
                     </h1>
                     <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                      The new wave of social media starts here. Join our mailing
-                      list to be one of the first to try it out.
+                      The new wave of social media starts here. Join our waitlist to be one of the first to try it out.
                     </p>
                     <div className="mt-10 sm:mt-12">
                       <form
