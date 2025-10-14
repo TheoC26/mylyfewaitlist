@@ -1,103 +1,104 @@
+import Footer from "@/components/Footer";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <>
+      <main className="bg-white">
+        <div className="top-0 left-0 mx-4 mt-16">
+          {/* <Image
+            src="/MnemoLogoNoText.png"
+            alt="Mnemo Logo"
+            width={1000} // Set width of the logo
+            height={1000} // Set height of the logo
+            className="w-16 h-16" // Optional Tailwind CSS classes for styling
+          /> */}
+        </div>
+        <div className="relative overflow-hidden">
+          <div className="bg-white pb-14 lg:overflow-hidden">
+            <div className="mx-auto max-w-6xl lg:px-8">
+              <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+                <div className="mx-auto max-w-md px-4 text-center sm:max-w-2xl sm:px-6 lg:flex lg:items-center lg:px-0 lg:text-left">
+                  <div className="lg:py-24">
+                    <h1 className="mt-4 text-4xl font-bold tracking-tight text-black sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
+                      <span className="block text-white font-outline-2">
+                        Introducing{" "}
+                      </span>
+                      <span className="block text-black">MyLyfe</span>
+                    </h1>
+                    <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+                      The new wave of social media starts here. Join our mailing
+                      list to be one of the first to try it out.
+                    </p>
+                    <div className="mt-10 sm:mt-12">
+                      <form
+                        className="sm:mx-auto sm:max-w-xl lg:mx-0"
+                        action="https://api.web3forms.com/submit"
+                        method="POST"
+                      >
+                        <div className="sm:flex">
+                          <input
+                            type="hidden"
+                            name="access_key"
+                            value="7048e4b3-ce01-4617-b3e3-7545fedb7e7d"
+                          ></input>
+                          <input
+                            type="hidden"
+                            name="subject"
+                            value="New Waitlist"
+                          ></input>
+                          <div className="min-w-0 flex-1">
+                            <label htmlFor="email" className="sr-only">
+                              Email address
+                            </label>
+                            <input
+                              id="email"
+                              type="email"
+                              name="email"
+                              placeholder="Enter your email"
+                              className="block w-full rounded-md bg-white px-4 py-2.5 text-base text-black placeholder-gray-500 outline-2 outline-black focus:outline-none focus:ring-2 focus:ring-gray-400"
+                              autoComplete="off"
+                              required
+                            />
+                          </div>
+                          <div className="mt-3 sm:mt-0 sm:ml-3">
+                            <button
+                              type="submit"
+                              className="block w-full rounded-md outline-1 outline-[#D7D7D7] bg-[url('/BG.png')] bg-cover py-3 px-4 text-black cursor-pointer text-sm font-semibold transition-all shadow hover:opacity-90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                            >
+                              Join
+                            </button>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    {/* button for apple store */}
+                    {/* <div className="mt-3">
+                      <a
+                        href="https://apps.apple.com/us/app/mnemo-remember/id6680171876"
+                        className="block w-full rounded-md bg-[#a796cc] py-3 px-4 font-medium text-white transition-all shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                      >
+                        Download on the App Store
+                      </a>
+                    </div> */}
+                  </div>
+                </div>
+                <div className="mt-12 hidden lg:flex justify-center w-full items-center">
+                  <Image
+                    className="w-4/7 mx-auto"
+                    width={1000} // Set width of the logo
+                    height={1000} // Set height of the logo
+                    src="/mylyfe-product.png"
+                    alt="Placeholder image"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+
+      <Footer />
+    </>
   );
 }
