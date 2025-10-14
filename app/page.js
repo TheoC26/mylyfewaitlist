@@ -83,6 +83,16 @@ export default function Home() {
                     </div> */}
                   </div>
                 </div>
+                <div className="mt-12 lg:hidden">
+                  <Image
+                    src="/mylyfe-product.png"
+                    alt="Product preview"
+                    width={600}
+                    height={600}
+                    className="w-72 sm:w-80 h-auto mx-auto"
+                    priority
+                  />
+                </div>
                 <div className="mt-12 hidden lg:flex justify-center w-full items-center">
                   <Image
                     className="w-4/7 mx-auto"
