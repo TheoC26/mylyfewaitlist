@@ -1,19 +1,54 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Footer from "@/components/Footer";
 import Image from "next/image";
+import confetti from 'canvas-confetti';
 
 export default function Home() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  function makeConfetti() {
+    var duration = 1.5 * 1000;
+    var animationEnd = Date.now() + duration;
+    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+    function randomInRange(min, max) {
+      return Math.random() * (max - min) + min;
+    }
+
+    var interval = setInterval(function () {
+      var timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        return clearInterval(interval);
+      }
+
+      var particleCount = 50 * (timeLeft / duration);
+      // since particles fall down, start a bit higher than random
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
+      });
+      confetti({
+        ...defaults,
+        particleCount,
+        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
+      });
+    }, 250);
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+    setIsLoading(true);
 
     if (!email) {
       setMessage('Email is required.');
+      setIsLoading(false);
       return;
     }
 
@@ -29,8 +64,9 @@ export default function Home() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage('Successfully joined the waitlist!');
+        setMessage("Success! Stay tuned for more info 👀");
         setEmail('');
+        makeConfetti();
       } else {
         setMessage(data.message || 'Something went wrong.');
       }
@@ -38,6 +74,7 @@ export default function Home() {
       setMessage('Something went wrong.');
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -91,14 +128,22 @@ export default function Home() {
                           <div className="mt-3 sm:mt-0 sm:ml-3">
                             <button
                               type="submit"
-                              className="block w-full rounded-md outline-1 outline-[#D7D7D7] bg-[url('/BG.png')] bg-cover py-3 px-4 text-black cursor-pointer text-sm font-semibold transition-all shadow hover:opacity-90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
+                              disabled={isLoading}
+                              className="block w-full rounded-md outline-1 outline-[#D7D7D7] bg-[url('/BG.png')] bg-cover py-3 px-4 text-black cursor-pointer text-sm font-semibold transition-all shadow hover:opacity-90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
                             >
-                              Join
+                              {isLoading ? 'Adding...' : 'Join'}
                             </button>
                           </div>
                         </div>
                       </form>
-                      {message && <p className="mt-2 text-sm text-gray-600">{message}</p>}
+                      {message && (
+                        <p
+                          className={`mt-4 text-center text-sm font-medium ${message.includes('Success') ? 'text-black' : 'text-black'
+                            }`}
+                        >
+                          {message}
+                        </p>
+                      )}
                     </div>
                     {/* button for apple store */}
                     {/* <div className="mt-3">
