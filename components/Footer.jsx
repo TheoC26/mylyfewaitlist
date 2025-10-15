@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Footer = () => {
   return (
@@ -73,11 +73,12 @@ const Footer = () => {
           </a>
         </div>
         <p className="mt-8 text-center text-base text-gray-400">
-          © 2024 Mnemo. All rights reserved.
+          © {new Date().getFullYear()} MyLyfe. All rights reserved.
         </p>
       </div>
     </footer>
   );
-}
+};
+
 
 export default Footer
