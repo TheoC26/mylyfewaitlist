@@ -57,7 +57,7 @@ const Footer = () => {
               </svg>
             </a> */}
           <a
-            href="https://www.instagram.com/mnemo_remember"
+            href="https://www.instagram.com/mylyfe_app"
             className="text-gray-400 hover:text-gray-500"
           >
             <span className="sr-only">Instagram</span>
@@ -80,5 +80,4 @@ const Footer = () => {
   );
 };
 
-
-export default Footer
+export default Footer;
