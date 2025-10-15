@@ -28,14 +28,16 @@ export async function POST(req) {
     }
 
     const sheets = google.sheets({ version: 'v4', auth });    const spreadsheetId = '1TJ4yFjPc-HjdnK4N1bzBCGvU7C3LkTGmIZRD2ApXFqc';
-    const range = 'Sheet1!A:A'; // Assumes you want to write to column A of "Sheet1"
+    const range = 'Sheet1!A:B'; // Assumes you want to write to columns A and B of "Sheet1"
+
+    const now = new Date().toLocaleString('en-US', { timeZone: 'UTC' });
 
     await sheets.spreadsheets.values.append({
       spreadsheetId,
       range,
       valueInputOption: 'USER_ENTERED',
       resource: {
-        values: [[email]],
+        values: [[email, now]],
       },
     });
 
