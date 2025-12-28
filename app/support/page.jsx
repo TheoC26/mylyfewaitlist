@@ -35,7 +35,7 @@ const Support = () => {
         href={"/"}
       >
         <Link href={"/"} className="text-xl font-bold text-center">
-          MyLyfe
+          My Lyfe
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ const Support = () => {
         <h1 className="text-3xl font-bold mb-5">Support</h1>
         <p className="text-lg mb-16">
           If you have any questions or need help, please contact us at
-          theo.htf.chan@gmail.com
+          team.mylyfe@gmail.com
         </p>
       </section>
       <FAQs faqs={faqs} />

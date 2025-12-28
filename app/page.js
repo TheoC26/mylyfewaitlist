@@ -99,7 +99,7 @@ export default function Home() {
                       <span className="block text-white font-outline-2">
                         Introducing{" "}
                       </span>
-                      <span className="block text-black">MyLyfe</span>
+                      <span className="block text-black">My Lyfe</span>
                     </h1>
                     <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
                       The new wave of social media starts here. Join our waitlist to be one of the first to try it out.
@@ -158,7 +158,7 @@ export default function Home() {
                 </div>
                 <div className="mt-12 lg:hidden">
                   <Image
-                    src="/mylyfe-product.png"
+                    src="/mylyfe-product3.png"
                     alt="Product preview"
                     width={600}
                     height={600}
@@ -171,7 +171,7 @@ export default function Home() {
                     className="w-4/7 mx-auto"
                     width={1000} // Set width of the logo
                     height={1000} // Set height of the logo
-                    src="/mylyfe-product.png"
+                    src="/mylyfe-product3.png"
                     alt="Placeholder image"
                     priority
                   />

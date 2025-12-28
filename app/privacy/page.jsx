@@ -1,181 +1,172 @@
 "use client";
 import Footer from "@/components/Footer";
-import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React from "react";
 
 const Privacy = () => {
   return (
     <main className="bg-white text-black">
-      <div
-        className="mx-4 mt-4 width-full flex itmes-center justify-center mb-16"
-        href={"/"}
-      >
+      <div className="mx-4 mt-4 width-full flex items-center justify-center mb-16">
         <Link href={"/"} className="text-xl font-bold text-center">
-          MyLyfe
+          My Lyfe
         </Link>
       </div>
-      <div className="max-w-4xl mx-auto px-4 py-8 mt-16">
-        <h1 className="text-4xl font-bold text-gray-900 mb-6">Privacy Policy</h1>
+      <div className="max-w-4xl mx-auto px-4 sm:py-8 mt-0 pb-20">
+        <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          Privacy Policy
+        </h1>
         <p className="text-sm text-gray-600 mb-8">
-          <strong>Last Updated:</strong> Jun 27, 2024.
+          <strong>Last Updated:</strong> December 28, 2025
         </p>
 
-        <p className="mb-8">
-          MyLyfe ("we," "our," "us") is committed to protecting your privacy.
-          This Privacy Policy explains how we collect, use, and share
-          information when you use our website, mobile applications, and other
-          online products and services (collectively, the "Services").
-        </p>
+        <section className="mb-8">
+          <p className="mb-4">
+            My Lyfe ("we," "our," "us") operates the website and services
+            available at My Lyfe. This Privacy Policy informs you of our
+            policies regarding the collection, use, and disclosure of personal
+            data when you use our Services and the choices you have associated
+            with that data.
+          </p>
+        </section>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
           1. Information We Collect
         </h2>
+        <div className="space-y-4 mb-8">
+          <div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              a. Information You Provide to Us
+            </h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>Account Information:</strong> Name, email address, and
+                <strong> phone number</strong>. By providing your phone number,
+                you consent to receive service-related communications.
+              </li>
+              <li>
+                <strong>User-Generated Content:</strong> Any data, text, or
+                media you upload or create within the Services.
+              </li>
+            </ul>
+          </div>
 
-        <h3 className="text-xl font-semibold text-gray-800 mb-3">
-          a. Information You Provide to Us
-        </h3>
-        <ul className="list-disc pl-5 mb-8">
-          <li className="mb-2">
-            <strong>Account Information:</strong> When you create an account
-            with us, we collect your name, email address, and other relevant
-            details.
-          </li>
-          <li>
-            <strong>User-Generated Content:</strong> We collect information that
-            you provide directly through the Services, such as the sources you
-            create or other content you submit.
-          </li>
-        </ul>
-
-        <h3 className="text-xl font-semibold text-gray-800 mb-3">
-          b. Information We Collect Automatically
-        </h3>
-        <ul className="list-disc pl-5 mb-8">
-          <li>
-            <strong>Usage Information:</strong> We collect information about
-            your use of the Services, including the pages you visit, the links
-            you click, and other actions you take.
-          </li>
-        </ul>
+          <div>
+            <h3 className="text-xl font-semibold text-gray-800 mb-2">
+              b. Information Collected Automatically
+            </h3>
+            <ul className="list-disc pl-5 space-y-2">
+              <li>
+                <strong>Log and Usage Data:</strong> IP addresses, browser type,
+                pages viewed, and time spent on the site.
+              </li>
+              <li>
+                <strong>Cookies and Tracking:</strong> We use cookies and
+                similar tracking technologies (like web beacons and pixels) to
+                track activity on our Service and hold certain information to
+                improve user experience.
+              </li>
+            </ul>
+          </div>
+        </div>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
           2. How We Use Your Information
         </h2>
-        <p className="mb-4">
-          We use the information we collect for various purposes, including:
-        </p>
-        <ul className="list-disc pl-5 mb-8">
-          <li className="mb-2">
-            <strong>Providing and Improving the Services:</strong> To operate
-            and maintain our Services, to improve the user experience, and to
-            develop new features.
-          </li>
-          <li className="mb-2">
-            <strong>Communications:</strong> To communicate with you about your
-            account, to respond to your inquiries, and to provide you with
-            updates and other information.
+        <ul className="list-disc pl-5 mb-8 space-y-2">
+          <li>
+            To provide, maintain, and notify you about changes to our Service.
           </li>
           <li>
-            <strong>Security:</strong> To protect the security and integrity of
-            our Services and to detect and prevent fraud.
+            To provide customer support and gather analysis to improve the
+            Service.
+          </li>
+          <li>
+            <strong>Communication:</strong> We may use your email or phone
+            number to send newsletters, marketing, or promotional materials. You
+            may opt-out via "Unsubscribe" links or by replying "STOP" to any
+            SMS.
           </li>
         </ul>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          3. How We Share Your Information
+          3. Data Sharing and Disclosure
         </h2>
         <p className="mb-4">
-          We do not share your personal information with third parties except in
-          the following circumstances:
+          We do not sell your personal data. We share information only with:
         </p>
-        <ul className="list-disc pl-5 mb-8">
-          <li className="mb-2">
-            <strong>Service Providers:</strong> We may share your information
-            with third-party service providers who assist us in operating our
-            Services.
-          </li>
-          <li className="mb-2">
-            <strong>Legal Requirements:</strong> We may disclose your
-            information if required to do so by law or in response to a legal
-            process, such as a court order or subpoena.
+        <ul className="list-disc pl-5 mb-8 space-y-2">
+          <li>
+            <strong>Service Providers:</strong> Hosting (e.g., Vercel),
+            Analytics (e.g., Google Analytics), and payment processors.
           </li>
           <li>
-            <strong>Business Transfers:</strong> In the event of a merger,
-            acquisition, or sale of all or a portion of our assets, your
-            information may be transferred as part of the transaction.
+            <strong>Legal Obligations:</strong> If required by law or in
+            response to valid requests by public authorities (e.g., a court or
+            government agency).
+          </li>
+          <li>
+            <strong>Business Assets:</strong> In the event of a merger or sale,
+            your data remains subject to the promises made in any pre-existing
+            Privacy Policy.
           </li>
         </ul>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          4. Your Choices and Rights
+          4. Data Retention
+        </h2>
+        <p className="mb-8">
+          We will retain your personal information only for as long as is
+          necessary for the purposes set out in this Privacy Policy. We retain
+          usage data for internal analysis purposes and to strengthen security.
+        </p>
+
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          5. Your Rights (GDPR/CCPA)
         </h2>
         <p className="mb-4">
-          You have certain rights and choices regarding your personal
-          information:
+          Depending on your location, you may have the following rights:
         </p>
-        <ul className="list-disc pl-5 mb-8">
-          <li className="mb-2">
-            <strong>Access and Update:</strong> You may access and update your
-            account information at any time by logging into your account.
-          </li>
+        <ul className="list-disc pl-5 mb-8 space-y-2">
           <li>
-            <strong>Data Deletion:</strong> You may request that we delete your
-            personal information by contacting us at{" "}
-            <a
-              href="mailto:theo.htf.chan@gmail.com"
-              className="text-blue-600 hover:underline"
-            >
-              theo.htf.chan@gmail.com
-            </a>
-            . Please note that certain information may be retained for legal or
-            legitimate business purposes.
+            The right to access, update, or delete the information we have on
+            you.
           </li>
+          <li>The right of rectification (to have information fixed).</li>
+          <li>The right to object to or restrict processing of your data.</li>
+          <li>The right to withdraw consent at any time.</li>
         </ul>
 
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Security</h2>
+        <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+          6. Security
+        </h2>
         <p className="mb-8">
-          We implement reasonable security measures to protect your information
-          from unauthorized access, use, or disclosure. However, no method of
-          transmission over the internet or electronic storage is completely
-          secure, and we cannot guarantee the absolute security of your
-          information.
+          The security of your data is important to us, but remember that no
+          method of transmission over the Internet is 100% secure. While we
+          strive to use commercially acceptable means to protect your Personal
+          Data, we cannot guarantee its absolute security.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          6. Children's Privacy
+          7. Children
         </h2>
         <p className="mb-8">
-          Our Services are not directed to children under the age of 13, and we
-          do not knowingly collect personal information from children under 13.
-          If we become aware that we have collected personal information from a
-          child under 13, we will take steps to delete such information.
+          Our Service does not address anyone under the age of 13. We do not
+          knowingly collect personally identifiable information from children.
+          If you are a parent and aware that your child has provided us with
+          data, please contact us.
         </p>
 
         <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-          7. Changes to This Privacy Policy
+          8. Contact
         </h2>
         <p className="mb-8">
-          We may update this Privacy Policy from time to time to reflect changes
-          in our practices or for other operational, legal, or regulatory
-          reasons. We will notify you of any significant changes by posting the
-          updated policy on our website and indicating the date of the latest
-          revision.
-        </p>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Contact Us</h2>
-        <p className="mb-8">
-          If you have any questions or concerns about this Privacy Policy or our
-          practices, please contact us at:
-        </p>
-        <p className="mb-4">
-          <strong>MyLyfe</strong>
+          For any questions about this Privacy Policy, please contact us at:
           <br />
-          Email:{" "}
           <a
-            href="mailto:theo.htf.chan@gmail.com"
-            className="text-blue-600 hover:underline"
+            href="mailto:team.mylyfe@gmail.com"
+            className="text-blue-600 font-medium"
           >
-            theo.htf.chan@gmail.com
+            team.mylyfe@gmail.com
           </a>
         </p>
       </div>
