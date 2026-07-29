@@ -41,7 +41,7 @@ export default function UserProfileRedirectPage() {
 
           <div className="flex flex-col gap-3">
             <a
-              href="https://apps.apple.com/app/idYOUR_APP_ID"
+              href="https://apps.apple.com/app/id6758522939"
               className="w-full rounded-lg bg-black text-white py-3 font-semibold"
             >
               Download on the App Store
