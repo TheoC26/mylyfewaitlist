@@ -158,7 +158,7 @@ export default function Home() {
                 </div>
                 <div className="mt-12 lg:hidden">
                   <Image
-                    src="/mylyfe-product3.png"
+                    src="/productMockup.png"
                     alt="Product preview"
                     width={600}
                     height={600}
@@ -171,7 +171,7 @@ export default function Home() {
                     className="w-4/7 mx-auto"
                     width={1000} // Set width of the logo
                     height={1000} // Set height of the logo
-                    src="/mylyfe-product3.png"
+                    src="/productMockup.png"
                     alt="Placeholder image"
                     priority
                   />
