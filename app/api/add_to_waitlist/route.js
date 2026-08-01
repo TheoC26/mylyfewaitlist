@@ -58,7 +58,23 @@ async function appendToSheet(email) {
   });
 }
 
-async function joinViaApi(email) {
+/**
+ * The visitor's real IP, for rate limiting on the API side.
+ *
+ * Prefer x-real-ip: Vercel sets it from the actual connection, so a client
+ * cannot forge it. x-forwarded-for is a client-appendable list, so if we fall
+ * back to it we take only the FIRST entry — the one the edge prepended —
+ * otherwise anyone could send a header full of junk and get a fresh rate-limit
+ * bucket per request, which defeats the entire point.
+ */
+function clientIp(req) {
+  const real = req.headers.get('x-real-ip');
+  if (real) return real.trim();
+  const forwarded = req.headers.get('x-forwarded-for');
+  return forwarded ? forwarded.split(',')[0].trim() : '';
+}
+
+async function joinViaApi(email, ip) {
   if (!API_BASE || !process.env.WAITLIST_API_SECRET) {
     console.warn('[waitlist] API base or secret unset — recording in the Sheet only.');
     return null;
@@ -71,10 +87,19 @@ async function joinViaApi(email) {
       // Server-only. If this ever picks up a NEXT_PUBLIC_ prefix it ships to
       // every browser, and anyone can mail the entire list.
       'x-waitlist-secret': process.env.WAITLIST_API_SECRET,
+      // Without this the API sees only Vercel's egress address, identical for
+      // every signup on earth, and cannot tell one visitor from a script.
+      ...(ip ? { 'x-client-ip': ip } : {}),
     },
     body: JSON.stringify({ email, source: 'web' }),
     signal: AbortSignal.timeout(8000),
   });
+
+  // 429 is reported rather than swallowed, because it is the one failure that
+  // must NOT fall through to the Sheet. Everything else here degrades to
+  // "record it somewhere and carry on"; a throttled request is one we have
+  // deliberately decided not to accept at all.
+  if (res.status === 429) return { rateLimited: true };
 
   if (!res.ok) {
     console.error(`[waitlist] join API returned ${res.status}`);
@@ -99,23 +124,35 @@ export async function POST(req) {
     );
   }
 
-  // Both run; neither is allowed to sink the other.
-  const [apiResult, sheetResult] = await Promise.allSettled([
-    joinViaApi(email),
-    appendToSheet(email),
-  ]);
-
-  const joined = apiResult.status === 'fulfilled' ? apiResult.value : null;
-
-  if (apiResult.status === 'rejected') {
-    console.error('[waitlist] join API threw:', apiResult.reason?.message);
+  // The API goes FIRST and alone, rather than in parallel with the Sheet.
+  // It owns rate limiting, and a throttled request has to be able to stop the
+  // Sheet write too — running them together would mean a flood still filled the
+  // spreadsheet with junk even while the API was busy rejecting it.
+  let joined = null;
+  try {
+    joined = await joinViaApi(email, clientIp(req));
+  } catch (error) {
+    console.error('[waitlist] join API threw:', error.message);
   }
-  if (sheetResult.status === 'rejected') {
-    console.error('[waitlist] sheet append failed:', sheetResult.reason?.message);
+
+  if (joined?.rateLimited) {
+    return Response.json(
+      { message: "That's a few too many tries — give it a minute and try again." },
+      { status: 429 },
+    );
+  }
+
+  // Best-effort safety net, never allowed to sink the request.
+  let sheetOk = true;
+  try {
+    await appendToSheet(email);
+  } catch (error) {
+    sheetOk = false;
+    console.error('[waitlist] sheet append failed:', error.message);
   }
 
   // Both stores failed — the one case where the signup is genuinely lost.
-  if (!joined && sheetResult.status === 'rejected') {
+  if (!joined && !sheetOk) {
     return Response.json(
       { message: 'Something went wrong. Please try again.' },
       { status: 500 },
