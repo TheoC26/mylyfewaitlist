@@ -138,7 +138,7 @@ export default function AdminPage() {
 
         <div className="mt-8">
           {tab === "moderate" ? (
-            <Moderate api={api} onChange={loadStats} />
+            <Moderate api={api} secret={secret} onChange={loadStats} />
           ) : (
             <Broadcast api={api} />
           )}
@@ -148,7 +148,7 @@ export default function AdminPage() {
   );
 }
 
-function Moderate({ api, onChange }) {
+function Moderate({ api, secret, onChange }) {
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [working, setWorking] = useState(null);
@@ -181,6 +181,14 @@ function Moderate({ api, onChange }) {
       });
       setVideos((v) => v.filter((x) => x.id !== id));
       onChange();
+      // Drop the homepage's cached copy so the change is visible now rather
+      // than up to ten minutes later. Best-effort on purpose: the moderation
+      // decision is already saved, and a failed cache bust only means the
+      // homepage catches up on its own schedule.
+      fetch("/api/revalidate", {
+        method: "POST",
+        headers: { "x-cron-secret": secret },
+      }).catch(() => {});
     } catch (e) {
       alert(e.message);
     }
