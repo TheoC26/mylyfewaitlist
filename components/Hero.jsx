@@ -38,11 +38,11 @@ export default function Hero({ videos = [], serverLaunched = false }) {
         <>
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,white_0%,rgba(255,255,255,0.55)_18%,rgba(255,255,255,0.55)_72%,white_100%)]"
+            className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,white_0%,rgba(255,255,255,0.15)_18%,rgba(255,255,255,0.15)_72%,white_100%)]"
           />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(65%_60%_at_50%_38%,white_0%,rgba(255,255,255,0.94)_45%,transparent_100%)] lg:bg-[radial-gradient(60%_55%_at_28%_45%,white_0%,rgba(255,255,255,0.92)_45%,transparent_100%)]"
+            className="pointer-events-none absolute inset-0 bg-[radial-gradient(65%_60%_at_50%_38%,white_0%,rgba(255,255,255,0.75)_45%,transparent_100%)] lg:bg-[radial-gradient(60%_55%_at_28%_45%,white_0%,rgba(255,255,255,0.92)_45%,transparent_100%)]"
           />
         </>
       )}
