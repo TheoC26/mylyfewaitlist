@@ -8,7 +8,7 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "Join My Lyfe.",
+  title: "Join MyLyfe.",
   description: "The next wave of social media starts here.",
 };
 

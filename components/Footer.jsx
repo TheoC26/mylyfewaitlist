@@ -18,7 +18,6 @@ const TikTok = (props) => (
 
 export { TikTok };
 
-
 const Footer = () => {
   return (
     <footer className="bg-white">
@@ -127,7 +126,7 @@ const Footer = () => {
           </Link>
         </div>
         <p className="mt-8 text-center text-base text-gray-400">
-          © {new Date().getFullYear()} My Lyfe. All rights reserved.
+          © {new Date().getFullYear()} MyLyfe. All rights reserved.
         </p>
       </div>
     </footer>

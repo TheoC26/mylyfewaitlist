@@ -42,7 +42,7 @@ const Terms = () => {
     <main className="bg-white text-black">
       <div className="mx-4 mt-4 width-full flex items-center justify-center mb-16">
         <Link href={"/"} className="text-xl font-bold text-center">
-          My Lyfe
+          MyLyfe
         </Link>
       </div>
 
@@ -60,8 +60,8 @@ const Terms = () => {
             <strong>binding arbitration agreement</strong> and a{" "}
             <strong>class action waiver</strong>. They affect how any dispute
             between us is resolved. You may opt out of arbitration within{" "}
-            {ARBITRATION_OPT_OUT_DAYS} days — section 15.6 explains how. Sections
-            12, 13 and 14 limit our liability to you.
+            {ARBITRATION_OPT_OUT_DAYS} days — section 15.6 explains how.
+            Sections 12, 13 and 14 limit our liability to you.
           </p>
         </div>
 
@@ -130,7 +130,9 @@ const Terms = () => {
         <H2>4. Content standards and zero tolerance for abuse</H2>
         <P>
           The Service lets people post video and photo content. We have{" "}
-          <strong>no tolerance for objectionable content or abusive users</strong>
+          <strong>
+            no tolerance for objectionable content or abusive users
+          </strong>
           . By using the Service you agree that you will not post, send, or
           share content that:
         </P>
@@ -139,9 +141,7 @@ const Terms = () => {
             sexually exploits or endangers a minor, or is sexual content
             involving anyone under 18 in any form;
           </li>
-          <li>
-            is pornographic, obscene, or sexually explicit;
-          </li>
+          <li>is pornographic, obscene, or sexually explicit;</li>
           <li>
             harasses, bullies, threatens, defames, or incites violence against
             anyone;
@@ -202,8 +202,8 @@ const Terms = () => {
 
         <H2>5. Your content and the licence you give us</H2>
         <P>
-          <strong>You keep ownership of everything you post.</strong> We claim no
-          ownership of your videos, photos, or other content.
+          <strong>You keep ownership of everything you post.</strong> We claim
+          no ownership of your videos, photos, or other content.
         </P>
         <P>
           So that we can actually run the Service, you grant us a worldwide,
@@ -223,7 +223,27 @@ const Terms = () => {
           We will not use your content in marketing or advertising without
           asking you first.
         </P>
-        <P>You confirm that you have the rights to everything you post, and that:</P>
+        <P>
+          The one place we ask is our website video wall. If you were among the
+          first 1,000 people to join our waitlist, we invite you to upload a
+          short video to show publicly on our homepage. That invitation is
+          optional, it is separate from anything you post in the app, and
+          nothing is published unless you tick the box granting us permission on
+          the upload page. We keep a record of the wording you agreed to and the
+          date you agreed to it. Every submission is reviewed by a person before
+          it appears, and you can ask us to take yours down at any time by
+          emailing{" "}
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="text-blue-600 underline"
+          >
+            {CONTACT_EMAIL}
+          </a>
+          .
+        </P>
+        <P>
+          You confirm that you have the rights to everything you post, and that:
+        </P>
         <UL>
           <li>
             you have the permission of anyone identifiable who appears in it;
@@ -325,14 +345,15 @@ const Terms = () => {
 
         <H2>12. Disclaimer of warranties</H2>
         <Caps>
-          The service is provided &quot;as is&quot; and &quot;as available,&quot;
-          with all faults and without warranty of any kind. To the maximum extent
-          permitted by law, we disclaim all warranties, express, implied, or
-          statutory, including any implied warranties of merchantability, fitness
-          for a particular purpose, title, accuracy, and non-infringement. We do
-          not warrant that the service will be uninterrupted, secure, timely, or
-          error-free, that defects will be corrected, or that any content will be
-          preserved, backed up, or recoverable.
+          The service is provided &quot;as is&quot; and &quot;as
+          available,&quot; with all faults and without warranty of any kind. To
+          the maximum extent permitted by law, we disclaim all warranties,
+          express, implied, or statutory, including any implied warranties of
+          merchantability, fitness for a particular purpose, title, accuracy,
+          and non-infringement. We do not warrant that the service will be
+          uninterrupted, secure, timely, or error-free, that defects will be
+          corrected, or that any content will be preserved, backed up, or
+          recoverable.
         </Caps>
 
         <H2>13. Limitation of liability</H2>
@@ -349,8 +370,8 @@ const Terms = () => {
         <Caps>
           Our total aggregate liability to you for all claims relating to the
           service will not exceed the greater of (a) the total amount you have
-          paid us in the twelve months before the event giving rise to the claim,
-          or (b) {`US$${LIABILITY_CAP}`}.
+          paid us in the twelve months before the event giving rise to the
+          claim, or (b) {`US$${LIABILITY_CAP}`}.
         </Caps>
         <P>
           <strong>What this section does not cover.</strong> Nothing in these
@@ -360,20 +381,21 @@ const Terms = () => {
           cannot lawfully be excluded. If you are a consumer in the United
           Kingdom or Australia, you have statutory rights and guarantees that
           these Terms do not affect — in Australia, nothing here excludes,
-          restricts, or modifies any guarantee under the Australian Consumer Law.
-          Some jurisdictions do not allow the exclusion of certain warranties or
-          liabilities, so parts of sections 12 and 13 may not apply to you.
+          restricts, or modifies any guarantee under the Australian Consumer
+          Law. Some jurisdictions do not allow the exclusion of certain
+          warranties or liabilities, so parts of sections 12 and 13 may not
+          apply to you.
         </P>
 
         <H2>14. Indemnification</H2>
         <P>
           You agree to defend, indemnify, and hold harmless {PROVIDER_LEGAL} and
-          any future entity, successors, contractors, and agents from any claims,
-          damages, losses, liabilities, and expenses (including reasonable legal
-          fees) arising out of your content, your use of the Service, your
-          violation of these Terms, or your violation of any law or the rights of
-          any third party. This does not apply to the extent a claim arises from
-          our own gross negligence or wilful misconduct.
+          any future entity, successors, contractors, and agents from any
+          claims, damages, losses, liabilities, and expenses (including
+          reasonable legal fees) arising out of your content, your use of the
+          Service, your violation of these Terms, or your violation of any law
+          or the rights of any third party. This does not apply to the extent a
+          claim arises from our own gross negligence or wilful misconduct.
         </P>
 
         <H2>15. Dispute resolution, arbitration, and class action waiver</H2>
@@ -390,8 +412,8 @@ const Terms = () => {
             {CONTACT_EMAIL}
           </a>{" "}
           describing the dispute and what you want, and to give us{" "}
-          <strong>30 days</strong> to resolve it informally. Most problems can be
-          sorted out this way.
+          <strong>30 days</strong> to resolve it informally. Most problems can
+          be sorted out this way.
         </P>
 
         <H3>15.2 Binding individual arbitration</H3>
@@ -450,22 +472,23 @@ const Terms = () => {
         <H3>15.7 Severability of this section</H3>
         <P>
           If the class action waiver in 15.3 is found unenforceable as to a
-          particular claim, that claim will proceed in court and all other claims
-          remain in arbitration. If section 15 is found unenforceable in its
-          entirety, disputes will be resolved in the courts identified in section
-          16.
+          particular claim, that claim will proceed in court and all other
+          claims remain in arbitration. If section 15 is found unenforceable in
+          its entirety, disputes will be resolved in the courts identified in
+          section 16.
         </P>
 
         <H2>16. Governing law</H2>
         <P>
-          These Terms are governed by the laws of the State of {GOVERNING_STATE},
-          without regard to its conflict of law rules. Where a dispute is not
-          subject to arbitration, you and we submit to the exclusive jurisdiction
-          of the state and federal courts located in {VENUE}. If you are a
-          consumer resident in the United Kingdom, Canada, or Australia, nothing
-          in this section deprives you of the protection of mandatory consumer
-          protection laws of your country of residence, or of the right to bring
-          proceedings in your local courts where the law gives you that right.
+          These Terms are governed by the laws of the State of {GOVERNING_STATE}
+          , without regard to its conflict of law rules. Where a dispute is not
+          subject to arbitration, you and we submit to the exclusive
+          jurisdiction of the state and federal courts located in {VENUE}. If
+          you are a consumer resident in the United Kingdom, Canada, or
+          Australia, nothing in this section deprives you of the protection of
+          mandatory consumer protection laws of your country of residence, or of
+          the right to bring proceedings in your local courts where the law
+          gives you that right.
         </P>
 
         <H2>17. Apple App Store</H2>
@@ -475,17 +498,17 @@ const Terms = () => {
         </P>
         <UL>
           <li>
-            These Terms are between you and us only, not with Apple. Apple is not
-            responsible for the app or its content.
+            These Terms are between you and us only, not with Apple. Apple is
+            not responsible for the app or its content.
           </li>
           <li>
-            Apple has no obligation to provide any maintenance or support for the
-            app.
+            Apple has no obligation to provide any maintenance or support for
+            the app.
           </li>
           <li>
             If the app fails to conform to any applicable warranty, you may
-            notify Apple and Apple will refund the purchase price, if any. To the
-            maximum extent permitted by law, Apple has no other warranty
+            notify Apple and Apple will refund the purchase price, if any. To
+            the maximum extent permitted by law, Apple has no other warranty
             obligation whatsoever.
           </li>
           <li>
@@ -499,10 +522,10 @@ const Terms = () => {
             intellectual property rights.
           </li>
           <li>
-            You represent that you are not located in a country subject to a U.S.
-            Government embargo or designated as a &quot;terrorist supporting&quot;
-            country, and are not on any U.S. Government list of prohibited or
-            restricted parties.
+            You represent that you are not located in a country subject to a
+            U.S. Government embargo or designated as a &quot;terrorist
+            supporting&quot; country, and are not on any U.S. Government list of
+            prohibited or restricted parties.
           </li>
           <li>
             Apple and its subsidiaries are third-party beneficiaries of these
@@ -514,24 +537,24 @@ const Terms = () => {
         <UL>
           <li>
             <strong>Severability.</strong> If any provision is unenforceable, it
-            is modified to the minimum extent necessary, or severed, and the rest
-            remains in force.
+            is modified to the minimum extent necessary, or severed, and the
+            rest remains in force.
           </li>
           <li>
-            <strong>No waiver.</strong> Not enforcing a provision is not a waiver
-            of it.
+            <strong>No waiver.</strong> Not enforcing a provision is not a
+            waiver of it.
           </li>
           <li>
-            <strong>Entire agreement.</strong> These Terms and the Privacy Policy
-            are the whole agreement between us about the Service.
+            <strong>Entire agreement.</strong> These Terms and the Privacy
+            Policy are the whole agreement between us about the Service.
           </li>
           <li>
             <strong>Assignment.</strong> You may not assign these Terms. We may,
             as described in section 1.
           </li>
           <li>
-            <strong>Force majeure.</strong> We are not liable for failures caused
-            by events beyond our reasonable control.
+            <strong>Force majeure.</strong> We are not liable for failures
+            caused by events beyond our reasonable control.
           </li>
         </UL>
 
@@ -540,8 +563,8 @@ const Terms = () => {
           We may modify these Terms. If a change is material, we will update the
           date above and give notice in the app or by other reasonable means
           before it takes effect. Continuing to use the Service after that means
-          you accept the revised Terms. If you do not accept them, stop using the
-          Service and delete your account.
+          you accept the revised Terms. If you do not accept them, stop using
+          the Service and delete your account.
         </P>
 
         <p className="mt-12 text-gray-600">

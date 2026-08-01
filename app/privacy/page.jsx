@@ -31,7 +31,7 @@ const Privacy = () => {
     <main className="bg-white text-black">
       <div className="mx-4 mt-4 width-full flex items-center justify-center mb-16">
         <Link href={"/"} className="text-xl font-bold text-center">
-          My Lyfe
+          MyLyfe
         </Link>
       </div>
       <div className="max-w-4xl mx-auto px-4 sm:py-8 mt-0 pb-20">
@@ -177,8 +177,25 @@ const Privacy = () => {
         <H3>d. Our website</H3>
         <P>
           If you join the waitlist on our website, we collect the email address
-          you submit and store it in a private Google Sheet. That is the only
-          purpose it is used for.
+          you submit and store it in our database, and in a private Google
+          Sheet. We use it to send you launch updates and, if you are one of the
+          first 1,000 people to join, to invite you to add a short video to our
+          homepage. You can unsubscribe from these emails at any time using the
+          link at the bottom of any of them.
+        </P>
+        <P>
+          If you accept that invitation and upload a video, we store the video
+          you submit, a still frame taken from it, and a record of the
+          permission you gave us — what you agreed to, and when. Uploaded videos
+          are reviewed by a person before they appear anywhere. We show them
+          publicly on our homepage only, and only because you explicitly agreed
+          to that when you uploaded. Audio is removed during processing and is
+          not retained.
+        </P>
+        <P>
+          You can have your video taken down at any time by emailing us at{" "}
+          {CONTACT_EMAIL}. Videos are deleted when you ask us to remove them,
+          when we decline to publish them, or when we no longer need them.
         </P>
 
         <H2>3. What we do not collect</H2>
@@ -259,6 +276,10 @@ const Privacy = () => {
           <li>
             <strong>Google Sheets</strong> — storage of website waitlist emails.
           </li>
+          <li>
+            <strong>Resend</strong> — delivery of our waitlist and launch
+            emails.
+          </li>
         </UL>
 
         <div className="bg-gray-50 border-l-4 border-gray-400 p-5 mb-4">
@@ -313,7 +334,9 @@ const Privacy = () => {
           do, we delete:
         </P>
         <UL>
-          <li>your profile, including your name, username, and phone number;</li>
+          <li>
+            your profile, including your name, username, and phone number;
+          </li>
           <li>your video clips and their thumbnails;</li>
           <li>your weekly recaps;</li>
           <li>your reactions, including any photo reactions you sent;</li>
@@ -339,8 +362,12 @@ const Privacy = () => {
             safety issues, or legal claims for as long as necessary to handle
             them.
           </li>
+          <li>Waitlist emails are kept until you ask us to remove them.</li>
           <li>
-            Waitlist emails are kept until you ask us to remove them.
+            Videos submitted for our homepage are kept until you ask us to
+            remove them, or until we no longer need them. The record of the
+            permission you gave us is kept for as long as we use the video, so
+            we can show what was agreed.
           </li>
         </UL>
 
@@ -356,9 +383,9 @@ const Privacy = () => {
 
         <H2>9. Children</H2>
         <P>
-          The Service is not intended for anyone under {MIN_AGE}. We ask for your
-          date of birth during sign-up and block accounts below that age. We do
-          not knowingly collect personal information from children under{" "}
+          The Service is not intended for anyone under {MIN_AGE}. We ask for
+          your date of birth during sign-up and block accounts below that age.
+          We do not knowingly collect personal information from children under{" "}
           {MIN_AGE}, and if we learn that we have, we will delete the account
           and its content promptly.
         </P>
@@ -404,12 +431,13 @@ const Privacy = () => {
 
         <H3>United Kingdom (UK GDPR)</H3>
         <P>
-          Our legal bases for processing are: <strong>performance of a contract</strong>{" "}
-          (running your account and delivering the Service),{" "}
-          <strong>consent</strong> (contacts access, push notifications — each
-          withdrawable at any time), <strong>legitimate interests</strong>{" "}
-          (keeping the Service secure and preventing abuse), and{" "}
-          <strong>legal obligation</strong> where applicable.
+          Our legal bases for processing are:{" "}
+          <strong>performance of a contract</strong> (running your account and
+          delivering the Service), <strong>consent</strong> (contacts access,
+          push notifications — each withdrawable at any time),{" "}
+          <strong>legitimate interests</strong> (keeping the Service secure and
+          preventing abuse), and <strong>legal obligation</strong> where
+          applicable.
         </P>
         <P>
           You have the right to access, rectify, erase, restrict, and object to

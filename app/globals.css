@@ -11,3 +11,91 @@ body {
   font-family: var(--font-poppins);
   box-sizing: border-box;
 }
+
+/* ── Floating collage ──────────────────────────────────────────────────────
+   Drives components/FloatingCollage.jsx. Ported from the app's Reanimated
+   version; see that file for the correspondence, card tables and video budget.
+
+   Two nested elements rather than one, because `transform` is a single
+   property: a rise animation and a sway animation on the same element would
+   overwrite each other's transform rather than composing. Outer rises, inner
+   sways and carries the rotation.
+
+   Every tunable arrives as a custom property set inline per card. */
+
+@keyframes ml-rise {
+  from {
+    transform: translate3d(0, var(--rise-from), 0);
+  }
+  to {
+    transform: translate3d(0, var(--rise-to), 0);
+  }
+}
+
+@keyframes ml-sway {
+  from {
+    transform: translate3d(-7px, 0, 0) rotate(var(--rot));
+  }
+  to {
+    transform: translate3d(7px, 0, 0) rotate(var(--rot));
+  }
+}
+
+.ml-rise {
+  position: absolute;
+  top: 0;
+  left: var(--left);
+  width: var(--w);
+  height: var(--h);
+
+  /* svh, NOT vh. On mobile the URL bar showing and hiding changes vh, which
+     recomputes the keyframe mid-flight and makes every card visibly jump.
+     svh is the small-viewport height and stays put. */
+  --rise-from: calc(100svh + 120px);
+  /* Derived per-card from that card's own height rather than a shared constant,
+     so a tall card and a short one both leave the screen cleanly. */
+  --rise-to: calc(-1 * var(--h) - 40px);
+
+  animation: ml-rise var(--rise-dur) linear infinite;
+  /* `phase` in the RN source is described there as standing in for a negative
+     animation delay. Here it literally is one — the card starts mid-flight. */
+  animation-delay: calc(var(--phase) * var(--rise-dur) * -1);
+  will-change: transform;
+}
+
+.ml-sway {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  background-color: #c9c9c9;
+
+  /* The RN card carries a drop shadow; this one deliberately does not. The
+     15px radius is enough separation against white, and shadows are off the
+     table for this site. */
+
+  /* cubic-bezier(.45,0,.55,1) is quad-in-out, matching Easing.inOut(Easing.quad)
+     in the RN source. NOT the `ease-in-out` keyword — that is
+     cubic-bezier(.25,.1,.25,1), which is asymmetric and reads noticeably
+     different from the app. */
+  animation: ml-sway var(--sway-dur) cubic-bezier(0.45, 0, 0.55, 1) infinite
+    alternate;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Freeze the stream, but scatter the cards using their own phase value so
+     the result is a pleasing arrangement rather than every card stacked at the
+     start position. FloatingCollage also skips video playback in this mode. */
+  .ml-rise,
+  .ml-sway {
+    animation: none;
+  }
+  .ml-rise {
+    transform: translate3d(0, calc(var(--phase) * -60svh + 20svh), 0);
+  }
+  .ml-sway {
+    transform: rotate(var(--rot));
+  }
+}

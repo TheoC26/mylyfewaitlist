@@ -1,8 +1,8 @@
 import React from "react";
 
 export const metadata = {
-  title: "My Lyfe - Support",
-  description: "My Lyfe support",
+  title: "MyLyfe - Support",
+  description: "MyLyfe support",
 };
 
 const Layout = ({ children }) => {

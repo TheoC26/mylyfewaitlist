@@ -34,9 +34,9 @@ export default function UserProfileRedirectPage() {
         </div>
       ) : (
         <div className="text-center max-w-sm">
-          <h1 className="text-3xl font-bold mb-3">Get My Lyfe</h1>
+          <h1 className="text-3xl font-bold mb-3">Get MyLyfe</h1>
           <p className="text-gray-600 mb-6">
-            View this profile in the My Lyfe app
+            View this profile in the MyLyfe app
           </p>
 
           <div className="flex flex-col gap-3">

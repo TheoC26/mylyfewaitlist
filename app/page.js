@@ -1,187 +1,32 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Footer from "@/components/Footer";
-import Image from "next/image";
-import confetti from 'canvas-confetti';
+import Hero from "@/components/Hero";
+import { fetchWallVideos } from "@/lib/wall";
+import { hasLaunched } from "@/lib/launch";
 
-export default function Home() {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+/**
+ * Server component, on purpose. Converting this from 'use client' buys three
+ * things at once:
+ *
+ *  1. The collage videos are in the initial HTML — no client-side waterfall and
+ *     no layout shift as cards pop in.
+ *  2. The shuffle is decided on the server, so there is nothing for hydration
+ *     to disagree about.
+ *  3. Because `revalidate` re-runs this function, hasLaunched() is re-evaluated
+ *     periodically — which means the CACHED page self-corrects into launched
+ *     mode within five minutes of the launch instant, with no redeploy. The
+ *     client hook flips it instantly for anyone already looking at the tab;
+ *     this covers everyone arriving fresh from the CDN.
+ */
+export const revalidate = 300;
 
-  function makeConfetti() {
-    var duration = 1.5 * 1000;
-    var animationEnd = Date.now() + duration;
-    var defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-    function randomInRange(min, max) {
-      return Math.random() * (max - min) + min;
-    }
-
-    var interval = setInterval(function () {
-      var timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      var particleCount = 50 * (timeLeft / duration);
-      // since particles fall down, start a bit higher than random
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      });
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      });
-    }, 250);
-  }
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setMessage('');
-    setIsLoading(true);
-
-    if (!email) {
-      setMessage('Email is required.');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      const res = await fetch('/api/add_to_waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setMessage("Success! Stay tuned for more info 👀");
-        setEmail('');
-        makeConfetti();
-      } else {
-        setMessage(data.message || 'Something went wrong.');
-      }
-    } catch (error) {
-      setMessage('Something went wrong.');
-      console.error(error);
-    }
-    setIsLoading(false);
-  };
+export default async function Home() {
+  const videos = await fetchWallVideos();
 
   return (
     <>
       <main className="bg-white">
-        <div className="top-0 left-0 mx-4 mt-16">
-          {/* <Image
-            src="/MnemoLogoNoText.png"
-            alt="Mnemo Logo"
-            width={1000} // Set width of the logo
-            height={1000} // Set height of the logo
-            className="w-16 h-16" // Optional Tailwind CSS classes for styling
-          /> */}
-        </div>
-        <div className="relative overflow-hidden">
-          <div className="bg-white pb-14 lg:overflow-hidden">
-            <div className="mx-auto max-w-6xl lg:px-8">
-              <div className="lg:grid lg:grid-cols-2 lg:gap-8">
-                <div className="mx-auto max-w-md px-4 text-center sm:max-w-2xl sm:px-6 lg:flex lg:items-center lg:px-0 lg:text-left">
-                  <div className="lg:py-24">
-                    <h1 className="mt-4 text-4xl font-bold tracking-tight text-black sm:mt-5 sm:text-6xl lg:mt-6 xl:text-6xl">
-                      <span className="block text-white font-outline-2">
-                        Introducing{" "}
-                      </span>
-                      <span className="block text-black">My Lyfe</span>
-                    </h1>
-                    <p className="mt-3 text-base text-gray-400 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                      The new wave of social media starts here. Join our waitlist to be one of the first to try it out.
-                    </p>
-                    <div className="mt-10 sm:mt-12">
-                      <form
-                        className="sm:mx-auto sm:max-w-xl lg:mx-0"
-                        onSubmit={handleSubmit}
-                      >
-                        <div className="sm:flex">
-                          <div className="min-w-0 flex-1">
-                            <label htmlFor="email" className="sr-only">
-                              Email address
-                            </label>
-                            <input
-                              id="email"
-                              type="email"
-                              placeholder="Enter your email"
-                              className="block w-full rounded-md bg-white px-4 py-2.5 text-base text-black placeholder-gray-500 outline-2 outline-black focus:outline-none focus:ring-2 focus:ring-gray-400"
-                              value={email}
-                              onChange={(e) => setEmail(e.target.value)}
-                              autoComplete="off"
-                              required
-                            />
-                          </div>
-                          <div className="mt-3 sm:mt-0 sm:ml-3">
-                            <button
-                              type="submit"
-                              disabled={isLoading}
-                              className="block w-full rounded-md outline-1 outline-[#D7D7D7] bg-[url('/BG.png')] bg-cover py-3 px-4 text-black cursor-pointer text-sm font-semibold transition-all shadow hover:opacity-90 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed"
-                            >
-                              {isLoading ? 'Adding...' : 'Join'}
-                            </button>
-                          </div>
-                        </div>
-                      </form>
-                      {message && (
-                        <p
-                          className={`mt-4 text-center text-sm font-medium ${message.includes('Success') ? 'text-black' : 'text-black'
-                            }`}
-                        >
-                          {message}
-                        </p>
-                      )}
-                    </div>
-                    {/* button for apple store */}
-                    {/* <div className="mt-3">
-                      <a
-                        href="https://apps.apple.com/us/app/mnemo-remember/id6680171876"
-                        className="block w-full rounded-md bg-[#a796cc] py-3 px-4 font-medium text-white transition-all shadow hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 focus:ring-offset-gray-900"
-                      >
-                        Download on the App Store
-                      </a>
-                    </div> */}
-                  </div>
-                </div>
-                <div className="mt-12 lg:hidden">
-                  <Image
-                    src="/productMockup.png"
-                    alt="Product preview"
-                    width={600}
-                    height={600}
-                    className="w-72 sm:w-80 h-auto mx-auto"
-                    priority
-                  />
-                </div>
-                <div className="mt-12 hidden lg:flex justify-center w-full items-center">
-                  <Image
-                    className="w-4/7 mx-auto"
-                    width={1000} // Set width of the logo
-                    height={1000} // Set height of the logo
-                    src="/productMockup.png"
-                    alt="Placeholder image"
-                    priority
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Hero videos={videos} serverLaunched={hasLaunched()} />
       </main>
-
       <Footer />
     </>
   );

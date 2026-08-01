@@ -8,24 +8,24 @@ import React from "react";
 const Support = () => {
   const faqs = [
     {
-      question: "What is My Lyfe?",
+      question: "What is MyLyfe?",
       answer:
-        "My Lyfe is a new kind of social app that helps people stay connected through real, personal moments. Instead of likes and scrolling, users record short video diaries that are turned into meaningful weekly montages.",
+        "MyLyfe is a new kind of social app that helps people stay connected through real, personal moments. Instead of likes and scrolling, users record short video diaries that are turned into meaningful weekly montages.",
     },
     {
-      question: "How does My Lyfe work?",
+      question: "How does MyLyfe work?",
       answer:
-        "At the end of each week, My Lyfe reminds you to record your final clip by saying “and that’s my Lyfe.” Then, it compiles your short videos into a simple, authentic montage you can keep private, share with close friends, or post publicly.",
+        "At the end of each week, MyLyfe reminds you to record your final clip by saying “and that’s MyLyfe.” Then, it compiles your short videos into a simple, authentic montage you can keep private, share with close friends, or post publicly.",
     },
     {
-      question: "Who is My Lyfe for?",
+      question: "Who is MyLyfe for?",
       answer:
-        "My Lyfe is for anyone who wants to feel more connected without the pressure of traditional social media — from college students and families to long-distance friends and couples.",
+        "MyLyfe is for anyone who wants to feel more connected without the pressure of traditional social media — from college students and families to long-distance friends and couples.",
     },
     {
-      question: "Is My Lyfe powered by AI?",
+      question: "Is MyLyfe powered by AI?",
       answer:
-        "Yes — My Lyfe uses smart editing tools to automatically organize and highlight your week’s most meaningful moments. But at its core, My Lyfe isn’t about technology — it’s about people and genuine connection.",
+        "Yes — MyLyfe uses smart editing tools to automatically organize and highlight your week’s most meaningful moments. But at its core, MyLyfe isn’t about technology — it’s about people and genuine connection.",
     },
   ];
   return (
@@ -35,7 +35,7 @@ const Support = () => {
         href={"/"}
       >
         <Link href={"/"} className="text-xl font-bold text-center">
-          My Lyfe
+          MyLyfe
         </Link>
       </div>
 
