@@ -166,13 +166,25 @@ export async function POST(req) {
     );
   }
 
-  // Best-effort safety net, never allowed to sink the request.
+  // Skip the Sheet when the API already knew this address. The Sheet is a
+  // safety net for addresses we might otherwise LOSE, and a repeat signup is
+  // by definition already recorded — appending it again only creates a row
+  // that has to be deduplicated later, and makes the sheet's length look like
+  // a signup count when it is not.
+  //
+  // Note this is only knowable when the API answered. If it did not, we cannot
+  // tell a duplicate from a new address, so we append: a redundant row is
+  // trivial to clean up, a lost signup is not.
   let sheetOk = true;
-  try {
-    await appendToSheet(email);
-  } catch (error) {
-    sheetOk = false;
-    console.error('[waitlist] sheet append failed:', error.message);
+  if (joined?.alreadyJoined) {
+    console.log(`[waitlist] ${email} already on the list — skipping Sheet append.`);
+  } else {
+    try {
+      await appendToSheet(email);
+    } catch (error) {
+      sheetOk = false;
+      console.error('[waitlist] sheet append failed:', error.message);
+    }
   }
 
   // Both stores failed — the one case where the signup is genuinely lost.
