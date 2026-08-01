@@ -75,8 +75,23 @@ function clientIp(req) {
 }
 
 async function joinViaApi(email, ip) {
-  if (!API_BASE || !process.env.WAITLIST_API_SECRET) {
-    console.warn('[waitlist] API base or secret unset — recording in the Sheet only.');
+  // Named individually, not as one combined check. Both produce exactly the
+  // same user-visible symptom — the address lands in the Sheet, nothing reaches
+  // Supabase, no email goes out — so a log line that does not say WHICH one is
+  // missing leaves you guessing between two different fixes.
+  if (!API_BASE) {
+    console.warn(
+      '[waitlist] NEXT_PUBLIC_MYLYFE_API_BASE is not set — signup recorded in the Sheet only.',
+    );
+    return null;
+  }
+  if (!process.env.WAITLIST_API_SECRET) {
+    console.warn(
+      '[waitlist] WAITLIST_API_SECRET is not set on this deployment — signup ' +
+        'recorded in the Sheet only. Add it in Vercel (Production scope) and REDEPLOY: ' +
+        'env vars are bound at deploy time, so adding one does not affect a ' +
+        'deployment that already exists.',
+    );
     return null;
   }
 
@@ -100,6 +115,15 @@ async function joinViaApi(email, ip) {
   // "record it somewhere and carry on"; a throttled request is one we have
   // deliberately decided not to accept at all.
   if (res.status === 429) return { rateLimited: true };
+
+  if (res.status === 401) {
+    console.error(
+      '[waitlist] join API returned 401 — WAITLIST_API_SECRET here does not match ' +
+        'the one on App Runner. They must be byte-identical; check for a trailing ' +
+        'newline or quotes picked up when pasting. Signup recorded in the Sheet only.',
+    );
+    return null;
+  }
 
   if (!res.ok) {
     console.error(`[waitlist] join API returned ${res.status}`);
