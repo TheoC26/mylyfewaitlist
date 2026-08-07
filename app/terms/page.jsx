@@ -209,8 +209,10 @@ const Terms = () => {
           So that we can actually run the Service, you grant us a worldwide,
           non-exclusive, royalty-free, sublicensable licence to host, store,
           copy, reproduce, reformat, transcode, and display your content, and to
-          submit it to automated systems — including third-party AI services —
-          in order to generate your weekly recap. This licence exists only to
+          submit it — together with the capture context attached to it, such as
+          the city name if you have enabled location — to automated systems,
+          including third-party AI services, in order to generate your weekly
+          recap. This licence exists only to
           operate, improve, and support the Service, and it ends when you delete
           the content or your account, except for the residual copies described
           in our{" "}
@@ -275,7 +277,8 @@ const Terms = () => {
           <li>use the Service to break any applicable law.</li>
         </UL>
 
-        <H2>7. Contacts and invitations</H2>
+        <H2>7. Optional permissions: contacts and location</H2>
+        <H3>Contacts and invitations</H3>
         <P>
           If you use the contacts feature, you confirm you have the right to
           check those numbers against our users. Invitations are composed and
@@ -286,6 +289,39 @@ const Terms = () => {
             complying with any laws that apply to messaging them.
           </strong>
         </P>
+
+        <H3>Location</H3>
+        <P>
+          Location is <strong>optional and off unless you turn it on</strong>.
+          If you turn it on, {SERVICE_NAME} records the city a moment was
+          recorded in, and a coarse coordinate, so that your weekly recap can
+          refer to where you were. What we collect, how coarse it is, and how to
+          erase it are set out in our{" "}
+          <Link href="/privacy" className="text-blue-600 underline">
+            Privacy Policy
+          </Link>
+          . You can withdraw the permission at any time in the app&apos;s
+          settings or your device settings.
+        </P>
+        <UL>
+          <li>
+            If you enable location, the city name attached to your clips forms
+            part of the content submitted to the automated systems described in
+            section 5, and may appear in the recap your friends see. Do not
+            enable it if you do not want that.
+          </li>
+          <li>
+            You are responsible for what you choose to record with location
+            enabled. Do not enable it where doing so would reveal the location
+            of someone else who has not agreed to that, or where recording your
+            location is restricted.
+          </li>
+          <li>
+            Location is a convenience feature and is best-effort. We do not
+            warrant that a place name is accurate, complete, or present at all,
+            and it must not be relied on for any purpose where accuracy matters.
+          </li>
+        </UL>
 
         <H2>8. Availability, changes, and your data</H2>
         <UL>

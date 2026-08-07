@@ -63,6 +63,11 @@ const Privacy = () => {
               address book.
             </li>
             <li>
+              Location is off unless you turn it on. If you turn it on, we note
+              the city a moment was recorded in — never a street address, only
+              while you are recording, and never in the background.
+            </li>
+            <li>
               We do not sell your data, show you ads, or use any advertising or
               analytics trackers.
             </li>
@@ -153,7 +158,54 @@ const Privacy = () => {
           </li>
         </UL>
 
-        <H3>c. Information collected automatically</H3>
+        <H3>c. Location — only if you turn it on</H3>
+        <P>
+          Location is <strong>off by default</strong>. If you turn it on, we
+          note roughly where a moment was recorded, so your weekly recap can say
+          where the week actually happened. Specifically:
+        </P>
+        <UL>
+          <li>
+            <strong>What we collect is coarse.</strong> We record a city-level
+            place name — for example &quot;Santa Monica, CA&quot; — and a
+            coordinate rounded to three decimal places, which is roughly 110
+            metres and deliberately too imprecise to identify a building. The
+            rounding happens on your device before anything is sent to us.{" "}
+            <strong>We never collect or store your street address.</strong>
+          </li>
+          <li>
+            <strong>We only read it while you are recording.</strong> The app
+            uses the foreground location permission only. We do not track you in
+            the background, and we do not keep a location history beyond the
+            single reading attached to each clip you post.
+          </li>
+          <li>
+            For a video you import from your camera roll, we use the location
+            your camera already saved in that video — never wherever you happen
+            to be at the moment you import it.
+          </li>
+          <li>
+            The <strong>city name</strong> is included in the automated analysis
+            described in section 5, so your recap can refer to where you were.
+            The coordinates are not sent to that service; they stay in our
+            database.
+          </li>
+          <li>
+            <strong>You can turn it off, and take it back.</strong> Location can
+            be switched off at any time in the app&apos;s settings or in your
+            device settings, which stops future clips carrying one. The app also
+            has a <strong>Delete Location History</strong> option that erases the
+            location saved on every clip you have already posted.
+          </li>
+        </UL>
+        <P>
+          Your time zone is a separate thing and is collected whether or not you
+          enable location. A time zone spans a continent and tells us nothing
+          about where you are; we use it only to work out which day and week a
+          clip belongs to.
+        </P>
+
+        <H3>d. Information collected automatically</H3>
         <UL>
           <li>
             <strong>Push notification token,</strong> if you enable
@@ -174,7 +226,7 @@ const Privacy = () => {
           </li>
         </UL>
 
-        <H3>d. Our website</H3>
+        <H3>e. Our website</H3>
         <P>
           If you join the waitlist on our website, we collect the email address
           you submit and store it in our database, and in a private Google
@@ -205,7 +257,13 @@ const Privacy = () => {
         </P>
         <UL>
           <li>We do not collect an email address for your app account.</li>
-          <li>We do not collect precise or background location.</li>
+          <li>
+            We do not collect your exact or street-level location, we do not
+            collect location in the background, and we do not track your
+            movements. The optional feature described in section 2(c) is
+            city-level, read only while you are recording, and off unless you
+            turn it on.
+          </li>
           <li>
             We do not use advertising identifiers, ad networks, or third-party
             analytics or tracking SDKs in the app.
@@ -240,6 +298,10 @@ const Privacy = () => {
             posts or when your weekly recap is ready.
           </li>
           <li>To help you find friends, if you enable contacts.</li>
+          <li>
+            To give your recap a sense of place, if you enable location — for
+            example, so it can name the city a week was spent in.
+          </li>
           <li>
             To keep the Service working, diagnose problems, and prevent abuse.
           </li>
@@ -291,7 +353,10 @@ const Privacy = () => {
             to <strong>Google&apos;s Gemini API</strong>, which analyses its
             content automatically in order to select and arrange moments. This
             means your video content is processed by Google as part of providing
-            this feature. Google&apos;s handling of that data is governed by its
+            this feature. If you have enabled location, the city-level place
+            name attached to a clip is sent along with it so the recap can
+            mention where you were; the coordinates are not.
+            Google&apos;s handling of that data is governed by its
             own API terms and privacy commitments. This processing is automated;
             no human at {SERVICE_NAME} reviews your videos as part of it. If you
             are not comfortable with this, please do not post videos to the
@@ -323,6 +388,12 @@ const Privacy = () => {
             shared Monday recap.
           </li>
           <li>
+            If you enable location, the city a clip was recorded in may be
+            mentioned in the recap your friends see — for instance, a recap that
+            refers to a weekend in another city. Only the city is ever used this
+            way, never an address, and never the underlying coordinates.
+          </li>
+          <li>
             You can block or report another user from within the app at any
             time.
           </li>
@@ -337,7 +408,10 @@ const Privacy = () => {
           <li>
             your profile, including your name, username, and phone number;
           </li>
-          <li>your video clips and their thumbnails;</li>
+          <li>
+            your video clips and their thumbnails, including any capture
+            location stored on them;
+          </li>
           <li>your weekly recaps;</li>
           <li>your reactions, including any photo reactions you sent;</li>
           <li>your profile photo;</li>
@@ -361,6 +435,12 @@ const Privacy = () => {
             We may retain records relating to reports of objectionable content,
             safety issues, or legal claims for as long as necessary to handle
             them.
+          </li>
+          <li>
+            Capture locations are kept for as long as the clip they belong to,
+            unless you erase them sooner with Delete Location History. A recap
+            that was already written may still refer to a city in its text after
+            you clear it.
           </li>
           <li>Waitlist emails are kept until you ask us to remove them.</li>
           <li>
@@ -413,8 +493,9 @@ const Privacy = () => {
           In the past twelve months we have collected the categories of personal
           information described in section 2: identifiers (phone number, name,
           username, account ID), age, audio and visual information (your videos
-          and photos), and internet or device activity (app usage and
-          diagnostics). The purposes are set out in section 4 and the recipients
+          and photos), internet or device activity (app usage and diagnostics),
+          and — only from users who have turned it on — coarse, city-level
+          geolocation. The purposes are set out in section 4 and the recipients
           in section 5.
         </P>
         <P>
@@ -428,13 +509,24 @@ const Privacy = () => {
           rights. An authorised agent may submit a request on your behalf with
           proof of authorisation.
         </P>
+        <P>
+          <strong>Geolocation.</strong> If you enable location, the coordinate
+          we store may qualify as precise geolocation, and therefore as
+          sensitive personal information, under California law. We collect it
+          only from users who have turned the feature on, and we use it only to
+          provide the recap feature described in this policy — never to infer
+          characteristics about you, and never for advertising. That is the
+          limited set of purposes permitted without a further right to limit its
+          use, but you may switch the feature off and erase what we have saved
+          at any time, as described in section 2(c).
+        </P>
 
         <H3>United Kingdom (UK GDPR)</H3>
         <P>
           Our legal bases for processing are:{" "}
           <strong>performance of a contract</strong> (running your account and
           delivering the Service), <strong>consent</strong> (contacts access,
-          push notifications — each withdrawable at any time),{" "}
+          location, push notifications — each withdrawable at any time),{" "}
           <strong>legitimate interests</strong> (keeping the Service secure and
           preventing abuse), and <strong>legal obligation</strong> where
           applicable.
