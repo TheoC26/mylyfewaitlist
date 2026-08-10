@@ -84,12 +84,31 @@ body {
   will-change: transform;
 }
 
+/* Reload swaps every card's footage at once. Fading the new batch up from the
+   card's own grey backdrop is what makes that read as a deliberate re-deal
+   rather than as fourteen images glitching. A true crossfade would mean
+   double-mounting every card for half a second, which is not worth it for
+   background decoration. */
+@keyframes ml-swap-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ml-swap {
+  animation: ml-swap-in 500ms ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   /* Freeze the stream, but scatter the cards using their own phase value so
      the result is a pleasing arrangement rather than every card stacked at the
      start position. FloatingCollage also skips video playback in this mode. */
   .ml-rise,
-  .ml-sway {
+  .ml-sway,
+  .ml-swap {
     animation: none;
   }
   .ml-rise {

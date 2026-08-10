@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
 import { useLaunchState } from "@/lib/useLaunchState";
 import FloatingCollage from "./FloatingCollage";
 import Countdown from "./Countdown";
 import WaitlistForm from "./WaitlistForm";
 import LaunchCTA from "./LaunchCTA";
+import ReloadWall from "./ReloadWall";
 
 /**
  * The homepage hero.
@@ -22,11 +24,12 @@ import LaunchCTA from "./LaunchCTA";
  */
 export default function Hero({ videos = [], serverLaunched = false }) {
   const { launched, parts } = useLaunchState(serverLaunched);
+  const [deal, setDeal] = useState(0);
   const hasCollage = videos.length > 0;
 
   return (
     <div className="relative flex min-h-svh flex-col overflow-hidden bg-white">
-      <FloatingCollage videos={videos} />
+      <FloatingCollage videos={videos} deal={deal} />
 
       {/* ── Scrim ────────────────────────────────────────────────────────────
           Two layers, both non-interactive so they never swallow a click on the
@@ -45,6 +48,20 @@ export default function Hero({ videos = [], serverLaunched = false }) {
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(65%_60%_at_50%_38%,white_0%,rgba(255,255,255,0.75)_45%,transparent_100%)] lg:bg-[radial-gradient(60%_55%_at_28%_45%,white_0%,rgba(255,255,255,0.92)_45%,transparent_100%)]"
           />
         </>
+      )}
+
+      {/* Only offered once there is a wall to re-deal. Absolute rather than a
+          flex sibling of the countdown so it keeps the top-right corner on its
+          own, level with the countdown's label on both breakpoints.
+
+          z-30, above the countdown's z-20 rather than level with it. The
+          countdown row is a full-width flex container, so its empty right half
+          overlaps this corner and — being later in the DOM — silently ate every
+          click until the button outranked it. */}
+      {hasCollage && (
+        <div className="absolute right-4 top-4 z-30 sm:right-6 sm:top-6">
+          <ReloadWall turns={deal} onReload={() => setDeal((n) => n + 1)} />
+        </div>
       )}
 
       {/* Pinned to the top centre, above both scrim layers, and deliberately

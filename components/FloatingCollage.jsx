@@ -63,7 +63,14 @@ const DESKTOP_CARDS = [
  */
 const VIDEO_BUDGET = { mobile: 6, desktop: 10 };
 
-export default function FloatingCollage({ videos = [], className = "" }) {
+/**
+ * @param {{ videos: Array, deal?: number, className?: string }} props
+ *   `deal` is bumped by the Reload button. It walks the card window forward
+ *   through `videos` rather than reshuffling, so consecutive deals share no
+ *   footage at all until the pool wraps — a reshuffle would keep landing on
+ *   clips you just saw, which is exactly what the button exists to escape.
+ */
+export default function FloatingCollage({ videos = [], deal = 0, className = "" }) {
   const [isDesktop, setIsDesktop] = useState(false);
   const [playable, setPlayable] = useState(() => new Set());
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -101,8 +108,16 @@ export default function FloatingCollage({ videos = [], className = "" }) {
   const table = isDesktop ? DESKTOP_CARDS : MOBILE_CARDS;
   const budget = isDesktop ? VIDEO_BUDGET.desktop : VIDEO_BUDGET.mobile;
 
+  // The page hands down far more videos than there are cards; the window slides
+  // by a full screenful per deal.
+  const offset = videos.length ? (deal * table.length) % videos.length : 0;
+
   const cards = videos.length
-    ? table.map((card, i) => ({ ...card, video: videos[i % videos.length], index: i }))
+    ? table.map((card, i) => ({
+        ...card,
+        video: videos[(i + offset) % videos.length],
+        index: i,
+      }))
     : [];
 
   /**
@@ -164,21 +179,28 @@ export default function FloatingCollage({ videos = [], className = "" }) {
           }}
         >
           <div className="ml-sway">
-            {/* The poster is ALWAYS painted, underneath. That single decision is
-                what makes every failure mode invisible: blocked autoplay, a
-                decode failure, a demoted card, or a browser that has simply run
-                out of decoders all degrade to a still frame instead of a black
-                rectangle. */}
-            <img
-              src={card.video.posterUrl}
-              alt=""
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            {playable.has(card.index) && (
-              <CardVideo src={card.video.videoUrl} poster={card.video.posterUrl} />
-            )}
+            {/* Keyed on `deal`, and deliberately INSIDE .ml-sway: keying either
+                animated element would restart its keyframes, so every card
+                would visibly jump back down the screen on reload. Remounting
+                only the contents also gives CardVideo a clean start on the new
+                src instead of leaving the old frame up while it loads. */}
+            <div key={deal} className="ml-swap absolute inset-0">
+              {/* The poster is ALWAYS painted, underneath. That single decision
+                  is what makes every failure mode invisible: blocked autoplay, a
+                  decode failure, a demoted card, or a browser that has simply
+                  run out of decoders all degrade to a still frame instead of a
+                  black rectangle. */}
+              <img
+                src={card.video.posterUrl}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              {playable.has(card.index) && (
+                <CardVideo src={card.video.videoUrl} poster={card.video.posterUrl} />
+              )}
+            </div>
           </div>
         </div>
       ))}

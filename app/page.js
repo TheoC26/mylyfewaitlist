@@ -20,7 +20,13 @@ import { hasLaunched } from "@/lib/launch";
 export const revalidate = 300;
 
 export default async function Home() {
-  const videos = await fetchWallVideos();
+  // 60 is the API's own ceiling, and far more than the 14 cards the collage can
+  // show at once. The surplus is the Reload button's ammunition: it re-deals
+  // from this pool client-side, which is the only thing that CAN work — the
+  // server shuffles on a 5-minute seed, so refetching inside that window returns
+  // the identical list. Cost is a few hundred bytes of URLs in the payload;
+  // nothing extra is downloaded until a card actually points at it.
+  const videos = await fetchWallVideos(60);
 
   return (
     <>
