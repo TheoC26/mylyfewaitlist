@@ -1,5 +1,6 @@
 import { revalidatePath, revalidateTag } from 'next/cache';
 import { WALL_VIDEOS_TAG } from '@/lib/wall';
+import { assertAdmin } from '@/lib/adminAuth';
 
 /**
  * Push a freshly-moderated video to the live homepage immediately.
@@ -16,22 +17,12 @@ import { WALL_VIDEOS_TAG } from '@/lib/wall';
  *
  * Gated by CRON_SECRET, the same value the admin page already holds — this can
  * force cache regeneration, which is worth a little rate-limiting of its own if
- * it were ever public.
+ * it were ever public. The gate itself lives in lib/adminAuth.js so this route
+ * and the analytics route cannot drift apart.
  */
 export async function POST(req) {
-  const secret = process.env.CRON_SECRET;
-
-  if (!secret) {
-    console.error('[revalidate] CRON_SECRET is not set on this deployment.');
-    return Response.json({ error: 'not_configured' }, { status: 503 });
-  }
-
-  const provided = req.headers.get('x-cron-secret') ?? '';
-  // Length check first: a plain !== would leak timing, and comparing unequal
-  // lengths is the case worth short-circuiting anyway.
-  if (provided.length !== secret.length || provided !== secret) {
-    return Response.json({ error: 'unauthorized' }, { status: 401 });
-  }
+  const denied = assertAdmin(req);
+  if (denied) return denied;
 
   revalidateTag(WALL_VIDEOS_TAG);
   revalidatePath('/');
